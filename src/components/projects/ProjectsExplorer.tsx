@@ -31,49 +31,75 @@ export function ProjectsExplorer({ projects }: { projects: Project[] }) {
     });
   }, [projects, category, query]);
 
-  const projectGroups: { type: ProjectType; title: string; description: string }[] = [
+  const projectGroups: {
+    type: ProjectType;
+    title: string;
+    description: string;
+    indicator: 'bg-violet' | 'bg-aqua';
+  }[] = [
     {
       type: 'Company',
       title: 'Company Projects',
-      description: 'Enterprise and internship work delivered with company teams and stakeholders.',
+      description:
+        'Enterprise and internship work delivered with company teams and stakeholders.',
+      indicator: 'bg-violet',
     },
     {
       type: 'Personal/Freelance',
       title: 'Personal & Freelance Projects',
-      description: 'Independent work, freelance delivery and experiments built to deepen practical engineering skills.',
+      description:
+        'Independent work, freelance delivery and experiments built to deepen practical engineering skills.',
+      indicator: 'bg-aqua',
     },
   ];
 
   return (
     <div>
-      <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <div className="flex flex-wrap gap-2">
-          {filterCategories.map((cat) => (
-            <button
-              key={cat}
-              type="button"
-              onClick={() => setCategory(cat)}
-              className={cn(
-                'rounded-md border px-3 py-1.5 text-sm transition-colors',
-                category === cat
-                  ? 'border-accent/50 bg-accent/10 text-accent'
-                  : 'border-border text-muted hover:text-foreground',
-              )}
-            >
-              {cat}
-            </button>
-          ))}
+      <div className="mb-10 rounded-2xl border border-border bg-surface/65 p-4 shadow-lg shadow-foreground/[0.02] backdrop-blur-sm sm:p-5">
+        <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
+          <p className="font-mono text-xs uppercase tracking-[0.14em] text-muted">
+            Find a project
+          </p>
+          <p className="font-mono text-xs text-muted">
+            <span className="text-foreground">
+              {String(filtered.length).padStart(2, '0')}
+            </span>
+            {' / '}
+            {String(projects.length).padStart(2, '0')} shown
+          </p>
         </div>
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex flex-wrap gap-2">
+            {filterCategories.map((cat) => (
+              <button
+                key={cat}
+                type="button"
+                onClick={() => setCategory(cat)}
+                className={cn(
+                  'rounded-full border px-3.5 py-2 text-sm transition-all',
+                  category === cat
+                    ? 'border-accent/50 bg-accent/10 text-accent shadow-sm shadow-accent/10'
+                    : 'border-border bg-background/50 text-muted hover:border-border-strong hover:text-foreground',
+                )}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
 
-        <div className="relative w-full sm:w-64">
-          <Search size={15} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-muted" />
-          <input
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search projects…"
-            aria-label="Search projects"
-            className="w-full rounded-md border border-border bg-surface py-2 pl-9 pr-3 text-sm text-foreground outline-none placeholder:text-muted focus-visible:border-accent"
-          />
+          <div className="relative w-full sm:w-72">
+            <Search
+              size={15}
+              className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-muted"
+            />
+            <input
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search projects…"
+              aria-label="Search projects"
+              className="w-full rounded-full border border-border bg-background py-2.5 pl-9 pr-4 text-sm text-foreground outline-none placeholder:text-muted focus-visible:border-accent"
+            />
+          </div>
         </div>
       </div>
 
@@ -84,20 +110,36 @@ export function ProjectsExplorer({ projects }: { projects: Project[] }) {
       ) : (
         <div className="space-y-14">
           {projectGroups.map((group) => {
-            const groupProjects = filtered.filter((project) => project.type === group.type);
+            const groupProjects = filtered.filter(
+              (project) => project.type === group.type,
+            );
 
             if (groupProjects.length === 0) return null;
 
             return (
-              <section key={group.type} aria-labelledby={`${group.type.toLowerCase()}-projects-heading`}>
-                <div className="mb-5 border-l-2 border-accent pl-4">
-                  <h2
-                    id={`${group.type.toLowerCase()}-projects-heading`}
-                    className="text-xl font-semibold text-foreground"
-                  >
-                    {group.title}
-                  </h2>
-                  <p className="mt-1 text-sm text-muted">{group.description}</p>
+              <section
+                key={group.type}
+                aria-labelledby={`${group.type.toLowerCase()}-projects-heading`}
+              >
+                <div
+                  className={`mb-6 flex items-start gap-4 border-b border-border pb-4`}
+                >
+                  <span
+                    className={`mt-1 h-10 w-1 shrink-0 rounded-full ${group.indicator}`}
+                    aria-hidden
+                  />
+                  <div>
+                    <h2
+                      id={`${group.type.toLowerCase()}-projects-heading`}
+                      className="text-xl font-semibold text-foreground"
+                    >
+                      {group.title}
+                    </h2>
+                    <p className="mt-1 text-sm text-muted">{group.description}</p>
+                  </div>
+                  <span className="ml-auto rounded-full border border-border bg-surface px-3 py-1 font-mono text-xs text-muted">
+                    {String(groupProjects.length).padStart(2, '0')}
+                  </span>
                 </div>
                 <ProjectGrid projects={groupProjects} />
               </section>

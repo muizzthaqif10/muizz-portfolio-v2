@@ -7,7 +7,7 @@ import { GithubIcon, LinkedinIcon } from '@/components/icons/BrandIcons';
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden border-b border-border">
+    <section className="hero-shell relative overflow-hidden border-b border-border">
       <div
         className="bg-grid pointer-events-none absolute inset-0 opacity-40"
         style={{
@@ -25,7 +25,8 @@ export function Hero() {
             </p>
             <p className="text-lg font-semibold text-accent sm:text-xl">{profile.fullName}</p>
             <h1 className="mt-5 max-w-3xl text-balance text-4xl font-semibold leading-[1.06] text-foreground sm:text-6xl">
-              Software engineer shipping reliable integrations, APIs &amp; cloud systems.
+              Software engineer shipping{' '}
+              <span className="hero-title-accent">reliable integrations, APIs &amp; cloud systems.</span>
             </h1>
             <p className="mt-7 max-w-xl text-balance text-lg leading-relaxed text-muted">
               I build and debug the backend systems that connect banking platforms,
@@ -82,7 +83,9 @@ export function Hero() {
             </div>
           </div>
 
-          <FlowVisual />
+          <div className="hero-visual-frame rounded-[1.5rem] p-2">
+            <FlowVisual />
+          </div>
         </div>
       </Container>
     </section>

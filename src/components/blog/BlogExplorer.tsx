@@ -23,14 +23,16 @@ export function BlogExplorer({ posts, tags }: { posts: PostMeta[]; tags: string[
 
   return (
     <div>
-      <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <div className="mb-7 flex flex-col gap-4 rounded-2xl border border-border bg-surface/70 p-4 sm:flex-row sm:items-center sm:justify-between sm:p-5">
         <div className="flex flex-wrap gap-2">
           <button
             type="button"
             onClick={() => setActiveTag(null)}
             className={cn(
-              'rounded-md border px-3 py-1.5 text-sm transition-colors',
-              !activeTag ? 'border-accent/50 bg-accent/10 text-accent' : 'border-border text-muted hover:text-foreground',
+              'rounded-full border px-3.5 py-1.5 text-sm transition-colors',
+              !activeTag
+                ? 'border-indigo-500/30 bg-indigo-500/10 text-indigo-700 dark:text-indigo-300'
+                : 'border-border bg-background/50 text-muted hover:border-indigo-500/30 hover:text-foreground',
             )}
           >
             All
@@ -41,10 +43,10 @@ export function BlogExplorer({ posts, tags }: { posts: PostMeta[]; tags: string[
               type="button"
               onClick={() => setActiveTag(tag)}
               className={cn(
-                'rounded-md border px-3 py-1.5 text-sm transition-colors',
+                'rounded-full border px-3.5 py-1.5 text-sm transition-colors',
                 activeTag === tag
-                  ? 'border-accent/50 bg-accent/10 text-accent'
-                  : 'border-border text-muted hover:text-foreground',
+                  ? 'border-indigo-500/30 bg-indigo-500/10 text-indigo-700 dark:text-indigo-300'
+                  : 'border-border bg-background/50 text-muted hover:border-indigo-500/30 hover:text-foreground',
               )}
             >
               {tag}
@@ -53,13 +55,13 @@ export function BlogExplorer({ posts, tags }: { posts: PostMeta[]; tags: string[
         </div>
 
         <div className="relative w-full sm:w-64">
-          <Search size={15} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-muted" />
+          <Search size={15} className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-muted" />
           <input
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search posts…"
             aria-label="Search blog posts"
-            className="w-full rounded-md border border-border bg-surface py-2 pl-9 pr-3 text-sm text-foreground outline-none placeholder:text-muted focus-visible:border-accent"
+            className="w-full rounded-full border border-border bg-background py-2.5 pl-10 pr-4 text-sm text-foreground outline-none transition-colors placeholder:text-muted focus-visible:border-indigo-500"
           />
         </div>
       </div>

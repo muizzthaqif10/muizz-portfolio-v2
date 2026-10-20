@@ -3,18 +3,22 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --background: #f3f6f4;
-  --surface: #fbfcfa;
+  --background: #f6f5fb;
+  --surface: #fdfcff;
   --surface-raised: #ffffff;
-  --border: #d9e3df;
-  --border-strong: #b9cbc5;
-  --foreground: #10201d;
-  --muted: #5b706a;
-  --accent: #087f70;
+  --border: #e2e0ec;
+  --border-strong: #c9c4dd;
+  --foreground: #1b1a2e;
+  --muted: #68677e;
+  --accent: #6652cb;
   --accent-foreground: #ffffff;
-  --amber: #a8710a;
-  --signal: #3f8f4f;
-  --danger: #c4453a;
+  --amber: #b56d08;
+  --signal: #168b69;
+  --danger: #c44158;
+  --violet: #8c65db;
+  --coral: #d95768;
+  --aqua: #087f91;
+  --sky: #3478c7;
 
   --font-body: 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
   --font-heading: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
@@ -22,18 +26,22 @@
 }
 
 .dark {
-  --background: #081311;
-  --surface: #0e1c19;
-  --surface-raised: #132621;
-  --border: #1d3932;
-  --border-strong: #2c5148;
-  --foreground: #e3f0eb;
-  --muted: #8ca9a0;
-  --accent: #65d5bd;
-  --accent-foreground: #06231d;
-  --amber: #f2b849;
-  --signal: #7fd858;
-  --danger: #f0857c;
+  --background: #0a0d19;
+  --surface: #111629;
+  --surface-raised: #171d34;
+  --border: #282c45;
+  --border-strong: #3c4161;
+  --foreground: #f1efff;
+  --muted: #a1a3bd;
+  --accent: #b3a0ff;
+  --accent-foreground: #17112b;
+  --amber: #ffc66d;
+  --signal: #6fe0b5;
+  --danger: #ff8292;
+  --violet: #c2a2ff;
+  --coral: #ff8890;
+  --aqua: #6bd9e4;
+  --sky: #83b8ff;
 }
 
 @theme inline {
@@ -49,6 +57,10 @@
   --color-amber: var(--amber);
   --color-signal: var(--signal);
   --color-danger: var(--danger);
+  --color-violet: var(--violet);
+  --color-coral: var(--coral);
+  --color-aqua: var(--aqua);
+  --color-sky: var(--sky);
 
   --font-sans: var(--font-body);
   --font-display: var(--font-heading);
@@ -102,14 +114,19 @@
     background-color: var(--background);
     background-image:
       radial-gradient(
-        circle at 10% 0%,
-        color-mix(in srgb, var(--accent) 10%, transparent),
+        ellipse at 0% 3%,
+        color-mix(in srgb, var(--violet) 12%, transparent),
+        transparent 34rem
+      ),
+      radial-gradient(
+        ellipse at 100% 24%,
+        color-mix(in srgb, var(--aqua) 8%, transparent),
         transparent 32rem
       ),
       radial-gradient(
-        circle at 90% 18%,
-        color-mix(in srgb, var(--amber) 7%, transparent),
-        transparent 28rem
+        ellipse at 42% 70%,
+        color-mix(in srgb, var(--coral) 5%, transparent),
+        transparent 40rem
       );
     color: var(--foreground);
     font-family: var(--font-sans);
@@ -154,7 +171,7 @@
   }
 
   .surface-lift {
-    box-shadow: 0 18px 45px -34px color-mix(in srgb, var(--foreground) 45%, transparent);
+    box-shadow: 0 18px 45px -34px color-mix(in srgb, var(--violet) 38%, transparent);
     transition:
       border-color 180ms ease,
       background-color 180ms ease,
@@ -163,14 +180,171 @@
   }
 
   .surface-lift:hover {
-    border-color: color-mix(in srgb, var(--accent) 55%, var(--border));
+    border-color: color-mix(in srgb, var(--violet) 55%, var(--border));
     background-color: var(--surface-raised);
-    box-shadow: 0 22px 50px -32px color-mix(in srgb, var(--accent) 38%, transparent);
+    box-shadow: 0 22px 50px -32px color-mix(in srgb, var(--violet) 42%, transparent);
     transform: translateY(-3px);
   }
 
   .section-wash {
-    background-color: color-mix(in srgb, var(--surface) 52%, transparent);
+    background:
+      radial-gradient(
+        ellipse at 8% 12%,
+        color-mix(in srgb, var(--violet) 9%, transparent),
+        transparent 34rem
+      ),
+      radial-gradient(
+        ellipse at 92% 88%,
+        color-mix(in srgb, var(--aqua) 7%, transparent),
+        transparent 34rem
+      ),
+      color-mix(in srgb, var(--surface) 62%, transparent);
+  }
+
+  .section-tint-violet {
+    background: linear-gradient(
+      115deg,
+      color-mix(in srgb, var(--violet) 7%, transparent),
+      transparent 65%
+    );
+  }
+
+  .section-tint-aqua {
+    background: linear-gradient(
+      115deg,
+      color-mix(in srgb, var(--aqua) 7%, transparent),
+      transparent 65%
+    );
+  }
+
+  .section-tint-amber {
+    background: linear-gradient(
+      115deg,
+      color-mix(in srgb, var(--amber) 7%, transparent),
+      transparent 65%
+    );
+  }
+
+  .section-tint-coral {
+    background: linear-gradient(
+      115deg,
+      color-mix(in srgb, var(--coral) 7%, transparent),
+      transparent 65%
+    );
+  }
+
+  .hero-shell {
+    background:
+      radial-gradient(
+        ellipse at 82% 28%,
+        color-mix(in srgb, var(--violet) 17%, transparent),
+        transparent 32rem
+      ),
+      radial-gradient(
+        ellipse at 22% 100%,
+        color-mix(in srgb, var(--aqua) 10%, transparent),
+        transparent 32rem
+      ),
+      linear-gradient(
+        135deg,
+        color-mix(in srgb, var(--surface) 76%, transparent),
+        transparent 75%
+      );
+  }
+
+  .projects-hero {
+    background:
+      radial-gradient(
+        ellipse at 88% 12%,
+        color-mix(in srgb, var(--violet) 17%, transparent),
+        transparent 27rem
+      ),
+      radial-gradient(
+        ellipse at 12% 100%,
+        color-mix(in srgb, var(--aqua) 10%, transparent),
+        transparent 30rem
+      ),
+      linear-gradient(
+        125deg,
+        color-mix(in srgb, var(--surface) 90%, transparent),
+        color-mix(in srgb, var(--surface-raised) 50%, transparent)
+      );
+  }
+
+  .project-detail-hero {
+    background:
+      radial-gradient(
+        ellipse at 92% 0%,
+        color-mix(in srgb, var(--coral) 12%, transparent),
+        transparent 24rem
+      ),
+      radial-gradient(
+        ellipse at 8% 100%,
+        color-mix(in srgb, var(--violet) 15%, transparent),
+        transparent 30rem
+      ),
+      linear-gradient(
+        125deg,
+        color-mix(in srgb, var(--surface) 90%, transparent),
+        color-mix(in srgb, var(--surface-raised) 55%, transparent)
+      );
+  }
+
+  .project-card {
+    box-shadow: 0 16px 45px -34px color-mix(in srgb, var(--violet) 45%, transparent);
+  }
+
+  .project-card:hover {
+    box-shadow: 0 24px 55px -34px color-mix(in srgb, var(--violet) 48%, transparent);
+  }
+
+  .project-story-card {
+    background-image: linear-gradient(
+      145deg,
+      color-mix(in srgb, var(--surface-raised) 75%, transparent),
+      color-mix(in srgb, var(--surface) 82%, transparent)
+    );
+  }
+
+  .hero-title-accent {
+    background: linear-gradient(
+      100deg,
+      var(--accent) 4%,
+      var(--violet) 52%,
+      var(--coral) 100%
+    );
+    background-clip: text;
+    color: transparent;
+    -webkit-background-clip: text;
+  }
+
+  .hero-visual-frame {
+    background:
+      radial-gradient(
+        ellipse at 100% 0%,
+        color-mix(in srgb, var(--coral) 13%, transparent),
+        transparent 18rem
+      ),
+      radial-gradient(
+        ellipse at 0% 100%,
+        color-mix(in srgb, var(--aqua) 14%, transparent),
+        transparent 22rem
+      );
+    box-shadow: 0 30px 80px -48px color-mix(in srgb, var(--violet) 52%, transparent);
+  }
+
+  .site-header {
+    box-shadow: 0 1px 0 color-mix(in srgb, var(--violet) 12%, transparent);
+  }
+
+  .site-footer {
+    background:
+      radial-gradient(
+        ellipse at 12% 100%,
+        color-mix(in srgb, var(--violet) 9%, transparent),
+        transparent 28rem
+      ),
+      color-mix(in srgb, var(--surface) 64%, transparent);
   }
 }
 
@@ -213,6 +387,7 @@
   color: var(--foreground);
   max-width: 68ch;
   line-height: 1.75;
+  font-size: 1.025rem;
 }
 
 .prose-post p {
@@ -221,16 +396,30 @@
   color: var(--foreground);
 }
 
+.prose-post > :first-child {
+  margin-top: 0;
+}
+
 .prose-post h2 {
-  margin-top: 2.2em;
-  margin-bottom: 0.8em;
-  font-size: 1.4rem;
+  margin-top: 2.6em;
+  margin-bottom: 0.9em;
+  padding-left: 0.8rem;
+  border-left: 3px solid color-mix(in srgb, #818cf8 70%, var(--border));
+  font-size: 1.55rem;
+  line-height: 1.3;
+  scroll-margin-top: 6rem;
 }
 
 .prose-post h3 {
   margin-top: 1.8em;
   margin-bottom: 0.6em;
-  font-size: 1.15rem;
+  font-size: 1.2rem;
+  scroll-margin-top: 6rem;
+}
+
+.prose-post strong {
+  color: var(--foreground);
+  font-weight: 650;
 }
 
 .prose-post a {
@@ -319,17 +508,25 @@
 }
 
 .prose-post blockquote {
-  border-left: 2px solid var(--accent);
-  padding-left: 1em;
+  margin: 1.75em 0;
+  border: 1px solid color-mix(in srgb, #818cf8 20%, var(--border));
+  border-left: 3px solid #818cf8;
+  border-radius: 0 0.75rem 0.75rem 0;
+  background: color-mix(in srgb, #818cf8 5%, var(--surface));
+  padding: 0.8rem 1.1rem;
   color: var(--muted);
-  font-style: normal;
-  margin: 1.5em 0;
+}
+
+.prose-post blockquote p {
+  margin: 0.5em 0;
+  color: inherit;
 }
 
 .prose-post img {
   max-width: 100%;
   height: auto;
   border-radius: 0.75rem;
+  border: 1px solid var(--border);
 }
 
 .prose-post table {

@@ -3,10 +3,10 @@
 import { useReducedMotion, motion } from 'framer-motion';
 
 const nodes = [
-  { id: 'client', label: 'client', x: 40, y: 40 },
-  { id: 'gateway', label: 'api-gateway', x: 220, y: 40 },
-  { id: 'service', label: 'service', x: 220, y: 150 },
-  { id: 'db', label: 'database', x: 40, y: 150 },
+  { id: 'client', label: 'client', x: 40, y: 40, color: 'var(--aqua)' },
+  { id: 'gateway', label: 'api-gateway', x: 220, y: 40, color: 'var(--violet)' },
+  { id: 'service', label: 'service', x: 220, y: 150, color: 'var(--amber)' },
+  { id: 'db', label: 'database', x: 40, y: 150, color: 'var(--coral)' },
 ];
 
 const path = 'M 40 40 H 220 V 150 H 40';
@@ -15,7 +15,7 @@ export function FlowVisual() {
   const reduceMotion = useReducedMotion();
 
   return (
-    <div className="surface-lift rounded-2xl border border-border bg-surface-raised/80 p-5 backdrop-blur-sm sm:p-6">
+    <div className="surface-lift rounded-2xl border border-border bg-surface-raised/90 p-5 backdrop-blur-sm sm:p-6">
       <div className="mb-4 flex items-center justify-between">
         <span className="font-mono text-xs text-muted">request-flow.trace</span>
         <span className="flex items-center gap-1.5 font-mono text-xs text-signal">
@@ -29,6 +29,8 @@ export function FlowVisual() {
 
         {!reduceMotion && (
           <motion.circle
+            cx={40}
+            cy={40}
             r="3.5"
             fill="var(--accent)"
             animate={{
@@ -46,8 +48,9 @@ export function FlowVisual() {
               height="28"
               rx="6"
               fill="var(--surface)"
-              stroke="var(--border-strong)"
+              stroke={node.color}
               strokeWidth="1"
+              strokeOpacity="0.75"
             />
             <text
               x="34"
@@ -55,7 +58,7 @@ export function FlowVisual() {
               textAnchor="middle"
               className="font-mono"
               fontSize="8.5"
-              fill="var(--foreground)"
+              fill={node.color}
             >
               {node.label}
             </text>

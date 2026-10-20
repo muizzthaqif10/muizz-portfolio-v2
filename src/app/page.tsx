@@ -50,7 +50,7 @@ export default async function HomePage() {
         </Container>
       </section>
 
-      <section className="border-b border-border py-16 sm:py-20">
+      <section className="section-tint-violet border-b border-border py-16 sm:py-20">
         <Container>
           <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
             <SectionHeading
@@ -70,7 +70,7 @@ export default async function HomePage() {
         </Container>
       </section>
 
-      <section className="border-b border-border py-16 sm:py-20">
+      <section className="section-tint-aqua border-b border-border py-16 sm:py-20">
         <Container>
           <SectionHeading eyebrow="skills" title="Technical Skills" />
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -90,7 +90,7 @@ export default async function HomePage() {
         </Container>
       </section>
 
-      <section className="border-b border-border py-16 sm:py-20">
+      <section className="section-tint-amber border-b border-border py-16 sm:py-20">
         <Container>
           <SectionHeading eyebrow="experience" title="Experience" />
           <ExperienceTimeline items={experience} />
@@ -119,7 +119,7 @@ export default async function HomePage() {
         </section>
       )}
 
-      <section className="py-16 sm:py-20">
+      <section className="section-tint-coral py-16 sm:py-20">
         <Container>
           <SectionHeading eyebrow="contact" title="Get in touch" />
           <ContactSection />
