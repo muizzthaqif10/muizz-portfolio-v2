@@ -5,19 +5,43 @@ import { TechBadge } from '@/components/ui/TechBadge';
 import type { Project } from '@/data/projects';
 import { GithubIcon } from '@/components/icons/BrandIcons';
 
-const statusTone: Record<Project['status'], 'signal' | 'amber' | 'accent' | 'muted'> = {
-  Live: 'signal',
-  'In Progress': 'amber',
-  'Case Study': 'accent',
-  Archived: 'muted',
-  Planned: 'muted',
+const statusStyles: Record<Project['status'], { badge: string; card: string; accent: string }> = {
+  Live: {
+    badge: 'border-sky-500/30 bg-sky-500/5 text-sky-700 dark:text-sky-300',
+    card: 'border-t-sky-500/70 hover:border-sky-400/50 hover:shadow-sky-500/10',
+    accent: 'text-sky-700 dark:text-sky-300',
+  },
+  'In Progress': {
+    badge: 'border-amber-500/30 bg-amber-500/5 text-amber-700 dark:text-amber-300',
+    card: 'border-t-amber-500/70 hover:border-amber-400/50 hover:shadow-amber-500/10',
+    accent: 'text-amber-700 dark:text-amber-300',
+  },
+  'Case Study': {
+    badge: 'border-violet-500/30 bg-violet-500/5 text-violet-700 dark:text-violet-300',
+    card: 'border-t-violet-500/70 hover:border-violet-400/50 hover:shadow-violet-500/10',
+    accent: 'text-violet-700 dark:text-violet-300',
+  },
+  Archived: {
+    badge: 'border-slate-500/30 bg-slate-500/5 text-slate-600 dark:text-slate-300',
+    card: 'border-t-slate-400/70 hover:border-slate-400/50 hover:shadow-slate-500/10',
+    accent: 'text-slate-700 dark:text-slate-300',
+  },
+  Planned: {
+    badge: 'border-rose-500/30 bg-rose-500/5 text-rose-700 dark:text-rose-300',
+    card: 'border-t-rose-500/70 hover:border-rose-400/50 hover:shadow-rose-500/10',
+    accent: 'text-rose-700 dark:text-rose-300',
+  },
 };
 
 export function ProjectCard({ project }: { project: Project }) {
+  const styles = statusStyles[project.status];
+
   return (
-    <div className="surface-lift group relative flex flex-col rounded-xl border border-border bg-surface/80 p-5">
+    <div
+      className={`group relative flex h-full flex-col rounded-xl border border-t-2 border-border bg-gradient-to-b from-surface-raised to-surface p-5 shadow-lg shadow-foreground/[0.03] transition-all duration-200 hover:-translate-y-1 hover:shadow-xl ${styles.card}`}
+    >
       <div className="mb-3 flex items-start justify-between gap-3">
-        <Badge tone={statusTone[project.status]}>{project.status}</Badge>
+        <Badge className={styles.badge}>{project.status}</Badge>
         {project.github ? (
           <a
             href={project.github}
@@ -37,13 +61,13 @@ export function ProjectCard({ project }: { project: Project }) {
         )}
       </div>
 
-      <h3 className="text-base font-semibold text-foreground">
-        <Link href={`/projects/${project.slug}`} className="hover:text-accent">
+      <h3 className="min-h-12 text-base font-semibold leading-6 text-foreground">
+        <Link href={`/projects/${project.slug}`} className={`transition-colors ${styles.accent}`}>
           <span className="absolute inset-0" aria-hidden />
           {project.name}
         </Link>
       </h3>
-      <p className="mt-2 text-sm leading-relaxed text-muted">{project.description}</p>
+      <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">{project.description}</p>
 
       <dl className="mt-4 grid grid-cols-2 gap-x-4 gap-y-2 border-y border-border py-3 text-xs">
         <div>
@@ -56,13 +80,13 @@ export function ProjectCard({ project }: { project: Project }) {
         </div>
       </dl>
 
-      <div className="mt-4 flex flex-wrap gap-1.5">
+      <div className="mt-4 flex h-[3.75rem] flex-wrap content-start gap-1.5 overflow-hidden">
         {project.stack.slice(0, 4).map((tech) => (
           <TechBadge key={tech} label={tech} />
         ))}
       </div>
 
-      <div className="mt-5 flex items-center gap-1.5 text-sm font-medium text-accent transition-transform group-hover:translate-x-1">
+      <div className={`mt-auto flex items-center gap-1.5 pt-5 text-sm font-medium transition-transform group-hover:translate-x-1 ${styles.accent}`}>
         View case study
         <ArrowUpRight size={14} />
       </div>

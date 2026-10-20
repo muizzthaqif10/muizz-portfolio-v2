@@ -1,5 +1,5 @@
 import { timingSafeEqual } from 'node:crypto';
-import { revalidatePath } from 'next/cache';
+import { revalidatePath, revalidateTag } from 'next/cache';
 
 export async function POST(request: Request) {
   const secret = process.env.SANITY_REVALIDATE_SECRET;
@@ -27,11 +27,13 @@ export async function POST(request: Request) {
   } catch {
     return Response.json({ message: 'Invalid JSON payload' }, { status: 400 });
   }
+  revalidateTag('sanity:blog', { expire: 0 });
   revalidatePath('/blog');
   revalidatePath('/');
   revalidatePath('/blog/[slug]', 'page');
   revalidatePath('/sitemap.xml');
   if (payload.slug?.current && /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(payload.slug.current)) {
+    revalidateTag(`sanity:post:${payload.slug.current}`, { expire: 0 });
     revalidatePath(`/blog/${payload.slug.current}`);
   }
 
