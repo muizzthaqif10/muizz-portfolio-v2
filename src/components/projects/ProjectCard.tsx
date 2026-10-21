@@ -59,7 +59,7 @@ export function ProjectCard({ project }: { project: Project }) {
             target="_blank"
             rel="noreferrer"
             aria-label={`${project.name} on GitHub`}
-            className="text-muted transition-colors hover:text-foreground"
+            className="relative z-20 text-muted transition-colors hover:text-foreground"
           >
             <GithubIcon size={16} />
           </a>
@@ -76,13 +76,7 @@ export function ProjectCard({ project }: { project: Project }) {
       </div>
 
       <h3 className="min-h-12 text-base font-semibold leading-6 text-foreground">
-        <Link
-          href={`/projects/${project.slug}`}
-          className={`relative z-[1] transition-colors ${styles.accent}`}
-        >
-          <span className="absolute inset-0" aria-hidden />
-          {project.name}
-        </Link>
+        <span className={styles.accent}>{project.name}</span>
       </h3>
       <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">
         {project.description}
@@ -122,6 +116,12 @@ export function ProjectCard({ project }: { project: Project }) {
         View case study
         <ArrowUpRight size={14} />
       </div>
+
+      <Link
+        href={`/projects/${project.slug}`}
+        aria-label={`${project.name}: View case study`}
+        className="absolute inset-0 z-10 rounded-2xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+      />
     </div>
   );
 }
