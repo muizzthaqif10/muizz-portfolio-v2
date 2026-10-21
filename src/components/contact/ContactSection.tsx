@@ -6,6 +6,11 @@ import { profile } from '@/data/profile';
 import { Button } from '@/components/ui/Button';
 import { GithubIcon, LinkedinIcon } from '@/components/icons/BrandIcons';
 
+const socialLinkClassName =
+  'flex items-center gap-2.5 rounded-lg border border-border bg-surface px-4 py-3 text-sm text-foreground transition-colors hover:border-accent/50';
+const inputClassName =
+  'w-full rounded-md border border-border bg-background px-3.5 py-2.5 text-sm text-foreground outline-none focus-visible:border-accent';
+
 export function ContactSection({ withForm = false }: { withForm?: boolean }) {
   const [copied, setCopied] = useState(false);
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
@@ -73,7 +78,7 @@ export function ContactSection({ withForm = false }: { withForm?: boolean }) {
             href={profile.linkedin}
             target="_blank"
             rel="noreferrer"
-            className="flex items-center gap-2.5 rounded-lg border border-border bg-surface px-4 py-3 text-sm text-foreground transition-colors hover:border-accent/50"
+            className={socialLinkClassName}
           >
             <LinkedinIcon size={16} className="text-muted" />
             LinkedIn
@@ -82,7 +87,7 @@ export function ContactSection({ withForm = false }: { withForm?: boolean }) {
             href={profile.github}
             target="_blank"
             rel="noreferrer"
-            className="flex items-center gap-2.5 rounded-lg border border-border bg-surface px-4 py-3 text-sm text-foreground transition-colors hover:border-accent/50"
+            className={socialLinkClassName}
           >
             <GithubIcon size={16} className="text-muted" />
             GitHub
@@ -110,7 +115,7 @@ export function ContactSection({ withForm = false }: { withForm?: boolean }) {
               required
               autoComplete="name"
               placeholder="e.g. Aisha Rahman"
-              className="w-full rounded-md border border-border bg-background px-3.5 py-2.5 text-sm text-foreground outline-none focus-visible:border-accent"
+              className={inputClassName}
             />
           </div>
           <div>
@@ -124,7 +129,7 @@ export function ContactSection({ withForm = false }: { withForm?: boolean }) {
               required
               autoComplete="email"
               placeholder="you@example.com"
-              className="w-full rounded-md border border-border bg-background px-3.5 py-2.5 text-sm text-foreground outline-none focus-visible:border-accent"
+              className={inputClassName}
             />
           </div>
           <div>
@@ -137,7 +142,7 @@ export function ContactSection({ withForm = false }: { withForm?: boolean }) {
               rows={4}
               required
               placeholder="Tell me a little about your project or question..."
-              className="w-full resize-none rounded-md border border-border bg-background px-3.5 py-2.5 text-sm text-foreground outline-none focus-visible:border-accent"
+              className={`resize-none ${inputClassName}`}
             />
           </div>
           <Button type="submit" className="w-full" disabled={status === 'sending'}>
